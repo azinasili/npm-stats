@@ -11,5 +11,9 @@ export default new Router({
       name: 'Index',
       component: Index,
     },
+    {
+      path: '/:package',
+      component: Index,
+    },
   ],
 });
