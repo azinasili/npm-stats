@@ -29,7 +29,13 @@
 </template>
 
 <script>
+import axios from 'axios';
+import LineChart from '@/components/LineChart';
+
 export default {
+  components: {
+    'line-chart': LineChart,
+  },
   name: 'index',
   data() {
     return {
@@ -42,6 +48,21 @@ export default {
       showError: false,
       errorMessage: 'Please enter a package name',
     };
-  }
+  },
+  methods: {
+    requestData() {
+      axios.get(`https://api.npmjs.org/downloads/range/${this.period}/${this.package}`)
+        .then((response) => {
+          this.downloads = response.data.downloads.map(download => download.downloads);
+          this.labels = response.data.downloads.map(download => download.day);
+          this.package = response.data.package;
+          this.loaded = true;
+        })
+        .catch((err) => {
+          this.errorMessage = err.response.data.error;
+          this.showError = true;
+        });
+    },
+  },
 };
 </script>
