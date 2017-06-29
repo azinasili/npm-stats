@@ -4,7 +4,7 @@ import { Line } from 'vue-chartjs';
 export default Line.extend({
   props: {
     chartData: {
-      type: Array | Object,
+      type: Array || Object,
       required: false,
     },
     chartLabels: {
