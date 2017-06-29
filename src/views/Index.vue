@@ -8,7 +8,7 @@
         placeholder="npm package name"
         class="search-input"
         v-on:keyup.enter="requestData"
-        v-model="packge">
+        v-model="package">
       <button
         v-on:click="requestData"
         class="search-button">Find</button>
@@ -50,19 +50,40 @@ export default {
     };
   },
   methods: {
+    resetState() {
+      this.loaded = false;
+      this.showError = false;
+    },
     requestData() {
+      if (this.package === null || this.package === '' || this.package === 'undefined') {
+        this.showError = true;
+        return;
+      }
+      this.resetState();
       axios.get(`https://api.npmjs.org/downloads/range/${this.period}/${this.package}`)
         .then((response) => {
+          console.log(response.data);
           this.downloads = response.data.downloads.map(download => download.downloads);
           this.labels = response.data.downloads.map(download => download.day);
-          this.package = response.data.package;
+          this.packageName = response.data.package;
+          this.setURL();
           this.loaded = true;
+          this.package = '';
         })
         .catch((err) => {
           this.errorMessage = err.response.data.error;
           this.showError = true;
         });
     },
+    setURL() {
+      history.pushState({ info: `npm-stats ${this.package}` }, this.package, `/#/${this.package}`);
+    },
+  },
+  mounted() {
+    if (this.$route.params.package) {
+      this.package = this.$route.params.package;
+      this.requestData();
+    }
   },
 };
 </script>
