@@ -12,11 +12,23 @@
       <button
         v-on:click="requestData"
         class="search-button">Find</button>
+      <div class="search-dates">
+        <datepicker
+          class="search-input"
+          name="start-date"
+          placeholder="Start Date"
+          v-model="periodStart"></datepicker>
+        <datepicker
+          class="search-input"
+          name="end-date"
+          placeholder="End Date"
+          v-model="periodEnd"></datepicker>
+      </div>
     </div>
     <div v-if="showError" class="error-message">{{errorMessage}}</div>
     <h1 v-if="loaded" class="title">{{packageName}}</h1>
     <div v-if="loaded" class="chart-container">
-      <div class="chart-title">Downloads per Day <span>{{period}}</span></div>
+      <div class="chart-title">Downloads per Day <span v-show="periodStart">from {{formattedStart}} until {{formattedEnd}}</span></div>
       <div class="chart-content">
         <line-chart
           v-if="loaded"
@@ -30,24 +42,39 @@
 
 <script>
 import axios from 'axios';
+import * as moment from 'moment';
+import Datepicker from 'vuejs-datepicker';
 import LineChart from '@/components/LineChart';
 
 export default {
   components: {
-    'line-chart': LineChart,
+    LineChart,
+    Datepicker,
   },
   name: 'index',
   data() {
     return {
       package: null,
       packageName: '',
-      period: 'last-month',
+      periodStart: '',
+      periodEnd: new Date(),
       loaded: false,
       downloads: [],
       labels: [],
       showError: false,
       errorMessage: 'Please enter a package name',
     };
+  },
+  computed: {
+    formattedStart() {
+      return moment(this.periodStart).format('YYYY-MM-DD');
+    },
+    formattedEnd() {
+      return moment(this.periodEnd).format('YYYY-MM-DD');
+    },
+    period() {
+      return this.periodStart ? `${this.formattedStart}:${this.formattedEnd}` : 'last-month';
+    },
   },
   methods: {
     resetState() {
@@ -56,6 +83,7 @@ export default {
     },
     requestData() {
       if (this.package === null || this.package === '' || this.package === 'undefined') {
+        this.errorMessage = 'please search for a package';
         this.showError = true;
         return;
       }
@@ -68,7 +96,6 @@ export default {
           this.packageName = response.data.package;
           this.setURL();
           this.loaded = true;
-          this.package = '';
         })
         .catch((err) => {
           this.errorMessage = err.response.data.error;
@@ -87,3 +114,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.search-input {
+  display: inline-block;
+}
+</style>
