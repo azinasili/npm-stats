@@ -1,50 +1,50 @@
 <template>
-<div class="content">
-  <div class="container">
-    <div class="search-container">
-      <input
-        type="search"
-        name="search"
-        placeholder="npm package name"
-        class="search-input"
-        v-on:keyup.enter="requestData"
-        v-model="package">
-      <button
-        v-on:click="requestData"
-        class="search-button">Find</button>
-      <div class="search-dates">
-        <datepicker
+  <div class="content">
+    <div class="container">
+      <div class="search-container">
+        <input
+          type="search"
+          name="search"
+          placeholder="npm package name"
           class="search-input"
-          name="start-date"
-          placeholder="Start Date"
-          v-model="periodStart"></datepicker>
-        <datepicker
-          class="search-input"
-          name="end-date"
-          placeholder="End Date"
-          v-model="periodEnd"></datepicker>
+          v-on:keyup.enter="requestData"
+          v-model="package">
+        <button
+          v-on:click="requestData"
+          class="search-button">Find</button>
+        <div class="search-dates">
+          <datepicker
+            class="search-input"
+            name="start-date"
+            placeholder="Start Date"
+            v-model="periodStart"></datepicker>
+          <datepicker
+            class="search-input"
+            name="end-date"
+            placeholder="End Date"
+            v-model="periodEnd"></datepicker>
+        </div>
       </div>
-    </div>
-    <div v-if="showError" class="error-message">{{errorMessage}}</div>
-    <h1 v-if="loaded" class="title">{{packageName}}</h1>
-    <div v-if="loaded" class="chart-container">
-      <div class="chart-title">Downloads per Day <span v-show="periodStart">from {{formattedPeriod}}</span></div>
-      <div class="chart-content">
-        <line-chart
-          v-if="loaded"
-          v-bind:chart-data="downloads"
-          v-bind:chart-labels="labels"></line-chart>
+      <div v-if="showError" class="error-message">{{errorMessage}}</div>
+      <h1 v-if="loaded" class="title">{{packageName}}</h1>
+      <div v-if="loaded" class="chart-container">
+        <div class="chart-title">Downloads per Day <span v-show="periodStart">from {{formattedPeriod}}</span></div>
+        <div class="chart-content">
+          <line-chart
+            v-if="loaded"
+            v-bind:chart-data="downloads"
+            v-bind:chart-labels="labels"></line-chart>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 import axios from 'axios';
 import Datepicker from 'vuejs-datepicker';
 import LineChart from '@/components/LineChart';
-import { dateToYear, dateToDay, dateBeautify } from '../utils/dateFormatter';
+import { dateToDay, dateBeautify } from '../utils/dateFormatter';
 
 export default {
   components: {
@@ -119,6 +119,10 @@ export default {
 </script>
 
 <style>
+.content {
+  padding: 4em;
+}
+
 .search-input {
   display: inline-block;
 }
