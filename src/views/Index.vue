@@ -28,7 +28,7 @@
     <div v-if="showError" class="error-message">{{errorMessage}}</div>
     <h1 v-if="loaded" class="title">{{packageName}}</h1>
     <div v-if="loaded" class="chart-container">
-      <div class="chart-title">Downloads per Day <span v-show="periodStart">from {{formattedStart}} until {{formattedEnd}}</span></div>
+      <div class="chart-title">Downloads per Day <span v-show="periodStart">from {{formattedPeriod}}</span></div>
       <div class="chart-content">
         <line-chart
           v-if="loaded"
@@ -42,9 +42,12 @@
 
 <script>
 import axios from 'axios';
-import * as moment from 'moment';
 import Datepicker from 'vuejs-datepicker';
 import LineChart from '@/components/LineChart';
+import {
+  dateToDay,
+  dateBeautify,
+} from '../utils/dateFormatter';
 
 export default {
   components: {
@@ -67,10 +70,13 @@ export default {
   },
   computed: {
     formattedStart() {
-      return moment(this.periodStart).format('YYYY-MM-DD');
+      return dateToDay(this.periodStart);
     },
     formattedEnd() {
-      return moment(this.periodEnd).format('YYYY-MM-DD');
+      return dateToDay(this.periodEnd);
+    },
+    formattedPeriod() {
+      return this.periodStart ? `${dateBeautify(this.formattedStart)} - ${dateBeautify(this.formattedEnd)}` : 'last-month';
     },
     period() {
       return this.periodStart ? `${this.formattedStart}:${this.formattedEnd}` : 'last-month';
