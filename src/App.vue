@@ -1,18 +1,12 @@
 <template>
   <main id="app">
-    <sidebar></sidebar>
     <router-view></router-view>
   </main>
 </template>
 
 <script>
-import Sidebar from './containers/Sidebar';
-
 export default {
   name: 'app',
-  components: {
-    Sidebar,
-  },
 };
 </script>
 
@@ -31,7 +25,6 @@ body {
 
 #app {
   color: #2c3e50;
-  display: flex;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
