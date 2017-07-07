@@ -34,7 +34,7 @@
           class="input-button">Find</button>
       </div>
       <div v-if="showResult" class="chart-container">
-        <div v-if="showError" class="error-message">{{errorMessage}}</div>
+        <error-message v-if="showError" v-bind:error-message="errorMessage"></error-message>
         <div v-if="loaded" class="chart">
           <h1 class="chart-title">{{packageName}}</h1>
           <span class="chart-info">Downloads per Day <span v-show="periodStart">from {{formattedPeriod}}</span></span>
@@ -54,12 +54,14 @@ import axios from 'axios';
 import Datepicker from 'vuejs-datepicker';
 import Titlebar from '@/containers/Titlebar';
 import LineChart from '@/components/LineChart';
+import ErrorMessage from '@/components/ErrorMessage';
 import { dateToDay, dateBeautify } from '../utils/dateFormatter';
 
 export default {
   components: {
     Titlebar,
     LineChart,
+    ErrorMessage,
     Datepicker,
   },
   name: 'index',
@@ -102,7 +104,7 @@ export default {
     },
     requestData() {
       if (this.package === null || this.package === '' || this.package === 'undefined') {
-        this.errorMessage = 'please search for a package';
+        this.errorMessage = 'Please search for a package';
         this.showError = true;
         return;
       }
@@ -225,10 +227,5 @@ export default {
   text-transform: uppercase;
   vertical-align: baseline;
   margin: 0 .5em 1em 0;
-}
-
-.error-message {
-  font-size: 1.25em;
-  text-align: center;
 }
 </style>
