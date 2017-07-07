@@ -22,7 +22,7 @@
             v-model="periodStart"></datepicker>
         </p>
         <p class="input-field">
-          <label class="input-label" for="end-date">Start Date:</label>
+          <label class="input-label" for="end-date">End Date:</label>
           <datepicker
             name="end-date"
             input-class="input"
