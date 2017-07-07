@@ -44,10 +44,7 @@
 import axios from 'axios';
 import Datepicker from 'vuejs-datepicker';
 import LineChart from '@/components/LineChart';
-import {
-  dateToDay,
-  dateBeautify,
-} from '../utils/dateFormatter';
+import { dateToYear, dateToDay, dateBeautify } from '../utils/dateFormatter';
 
 export default {
   components: {
@@ -57,15 +54,15 @@ export default {
   name: 'index',
   data() {
     return {
+      downloads: [],
+      errorMessage: 'Please enter a package name',
+      labels: [],
+      loaded: false,
       package: null,
       packageName: '',
-      periodStart: '',
       periodEnd: new Date(),
-      loaded: false,
-      downloads: [],
-      labels: [],
+      periodStart: '',
       showError: false,
-      errorMessage: 'Please enter a package name',
     };
   },
   computed: {
