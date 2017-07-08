@@ -142,7 +142,13 @@ export default {
 }
 
 .container {
-  padding: 2.5em;
+  padding: 1em;
+}
+
+@media (min-width: 50em) {
+  .search-container {
+    padding: 2.5em;
+  }
 }
 
 .search-container {
@@ -191,6 +197,7 @@ export default {
 
 .input {
   border: .0625em solid #0d968a;
+  border-radius: .35em;
   padding: .5em 1em;
   width: 100%;
 }
@@ -198,6 +205,7 @@ export default {
 .input-button {
   align-self: flex-end;
   border: 0;
+  border-radius: .35em;
   background: #0d968a;
   color: #fff;
   font-weight: 700;
@@ -218,17 +226,22 @@ export default {
 
 .chart-container {
   border: .0625em solid rgba(0, 0, 0, .12);
+  border-radius: .35em;
   box-shadow: 0 0 1em 0 rgba(6, 56, 51, .12);
-  padding: .75em;
+  padding: 1.25em 1.5em;
   margin: auto;
   max-width: 80em; /* 1280/16 = 80  */
 }
 
 .chart-title {
   display: inline-block;
-  font-size: 1.5em;
+  font-size: 1.45em;
   text-transform: uppercase;
   vertical-align: baseline;
-  margin: 0 .5em 1em 0;
+  margin: 0 1em 1em 0;
+}
+
+.chart-info {
+  font-size: .875em;
 }
 </style>
