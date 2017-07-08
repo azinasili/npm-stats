@@ -18,13 +18,19 @@ html {
   height: 100%;
 }
 
+@media (max-width: 50em) {
+  html {
+    font-size: 3vw;
+  }
+}
+
 body {
   height: 100%;
   margin: 0;
 }
 
 #app {
-  color: #2c3e50;
+  color: #043531;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
