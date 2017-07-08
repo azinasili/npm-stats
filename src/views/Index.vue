@@ -190,6 +190,7 @@ export default {
 }
 
 .input {
+  border: .0625em solid #0d968a;
   padding: .5em 1em;
   width: 100%;
 }
