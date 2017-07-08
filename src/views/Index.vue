@@ -220,6 +220,7 @@ export default {
   border: .0625em solid rgba(0, 0, 0, .12);
   box-shadow: 0 0 1em 0 rgba(6, 56, 51, .12);
   padding: .75em;
+  max-width: 80em; /* 1280/16 = 80  */
 }
 
 .chart-title {
