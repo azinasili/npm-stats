@@ -16,8 +16,14 @@ export default {
 <style>
 .titlebar {
   background: #0d968a;
-  padding: 2em;
+  padding: 1em;
   color: #fff;
+}
+
+@media (min-width: 50em) {
+  .titlebar {
+    padding: 2.5em;
+  }
 }
 
 .branding {
