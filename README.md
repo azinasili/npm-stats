@@ -2,7 +2,7 @@
 
 > Data is beautiful. An app to visualize npm stats
 
-[LIVE DEMO](https://azinasili.github.io/npm-stats/) | [ALT LINK](npm-stats.surge.sh)
+[LIVE DEMO](https://azinasili.github.io/npm-stats/) | [ALT LINK](http://npm-stats.surge.sh/)
 
 View download stats for NPM packages. Search by package name and even norrow your search between two dates.
 
